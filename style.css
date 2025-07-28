@@ -35,3 +35,10 @@ ul {
 li {
   font-size: 1.5em; /* macht den Text größer */
 }
+nav li.choosed {
+  background-color: #555; /* etwas helleres Grau */
+  border-radius: 12px;     /* runde Ecken */
+}
+nav li.choosed a {
+  font-weight: bold;
+}
