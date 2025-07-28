@@ -1,5 +1,6 @@
-const hash = window.location.hash;
+const hash = window.location.hash.substring(1);
 loadCategory(hash);
-void loadCategory(String hash) {
+
+function loadCategory(hash) {
   
 }
