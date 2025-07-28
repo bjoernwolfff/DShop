@@ -17,6 +17,17 @@ nav {
   justify-content: space-around;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+
+  justify-content: space-between; /* <-- hier ist der Trick */
+  align-items: center;
+  width: 100%;
+  padding: 0 30px; /* optionaler Innenabstand links & rechts */
+}
 nav a {
   color: white;
   text-decoration: none;
