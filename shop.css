@@ -1,35 +1,34 @@
- nav.category {
-      position: fixed;
-      top: 0 !important;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background-color: #333;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-    }
+nav.category {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #222;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
 
-    /* Entfernt die • Punkte und Einrückung */
-    nav.category ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      gap: 20px;
-    }
+nav.category ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
 
-    nav.category li a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.2em;
-      padding: 10px;
-    }
+nav.category li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  padding: 10px;
+}
 
-    nav.category li a:hover {
-      background-color: #444;
-      border-radius: 4px;
-    }
+nav.category li a:hover {
+  background-color: #444;
+  border-radius: 4px;
+}
