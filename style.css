@@ -17,7 +17,7 @@ nav.main-nav {
   justify-content: space-around;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
-nav ul {
+nav.main-nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -28,12 +28,12 @@ nav ul {
   width: 100%;
   padding: 0 30px;
 }
-nav a {
+nav.main-nav a {
   color: white;
   text-decoration: none;
   padding: 10px;
 }
-nav a:hover {
+nav.main-nav a:hover {
   background-color: #444;
 }
 content {
