@@ -23,10 +23,10 @@ nav ul {
   padding: 0;
   display: flex;
 
-  justify-content: space-between; /* <-- hier ist der Trick */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0 30px; /* optionaler Innenabstand links & rechts */
+  padding: 0 30px;
 }
 nav a {
   color: white;
