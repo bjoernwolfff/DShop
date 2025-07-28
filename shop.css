@@ -1,0 +1,17 @@
+nav.category {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+ul.category {
+  list-style-type: none; /* entfernt • */
+  padding: 0; /* optional: entfernt Einrückung */
+}
