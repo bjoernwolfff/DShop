@@ -4,7 +4,7 @@ body {
   background-color: #333;
   color: #fff;
 }
-nav {
+nav.main {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -17,12 +17,12 @@ nav {
   justify-content: space-around;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
-nav a {
+nav a.main {
   color: white;
   text-decoration: none;
   padding: 10px;
 }
-nav a:hover {
+nav a.main:hover {
   background-color: #444;
 }
 content {
@@ -32,6 +32,6 @@ ul {
   list-style-type: none; /* entfernt • */
   padding: 0; /* optional: entfernt Einrückung */
 }
-li {
+li.main {
   font-size: 1.5em; /* macht den Text größer */
 }
