@@ -28,3 +28,10 @@ nav a:hover {
 content {
   padding: 20px;
 }
+ul {
+  list-style-type: none; /* entfernt • */
+  padding: 0; /* optional: entfernt Einrückung */
+}
+li {
+  font-size: 1.5em; /* macht den Text größer */
+}
