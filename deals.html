@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deals</title>
+    
     <style>
       /* Reset und Body */
       body {
@@ -11,8 +13,7 @@
         background-color: #333;
         color: #fff;
         font-family: Arial, sans-serif;
-        padding-top: 70px; /* Platz für obere Navbar */
-        padding-bottom: 70px; /* Platz für untere Navbar */
+        padding-bottom: 120px; /* Mehr Platz für höhere Navbar */
       }
 
       /* Allgemeine List-Styles */
@@ -22,13 +23,13 @@
         margin: 0;
       }
 
-      /* UNTERE NAVIGATION (main-nav) */
+      /* UNTERE NAVIGATION (main-nav) - HÖHER POSITIONIERT */
       nav.main-nav {
         position: fixed;
-        bottom: 0;
+        bottom: 60px; /* 60px vom Boden entfernt statt 0px */
         left: 0;
         width: 100%;
-        height: 60px; /* Feste Höhe */
+        height: 60px;
         background-color: #333;
         color: white;
         display: flex;
@@ -47,20 +48,20 @@
         align-items: center;
         width: 100%;
         padding: 0 30px;
-        height: 100%; /* Volle Höhe der Navigation nutzen */
+        height: 100%;
       }
 
       nav.main-nav li {
-        height: 100%; /* Volle Höhe nutzen */
+        height: 100%;
         display: flex;
         align-items: center;
-        font-size: 1.2em; /* Einheitliche Schriftgröße */
+        font-size: 1.2em;
       }
 
       nav.main-nav a {
         color: white;
         text-decoration: none;
-        padding: 15px 20px; /* Einheitliches Padding */
+        padding: 15px 20px;
         display: flex;
         align-items: center;
         height: 100%;
@@ -75,60 +76,12 @@
       nav.main-nav li.choosed {
         background-color: #555;
         border-radius: 12px;
-        margin: 8px 4px; /* Kleiner Abstand für den Rahmen */
+        margin: 8px 4px;
       }
 
       nav.main-nav li.choosed a {
         font-weight: bold;
         border-radius: 12px;
-      }
-
-      /* OBERE NAVIGATION (category) */
-      nav.category {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 60px; /* Gleiche Höhe wie main-nav */
-        background-color: #222;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        z-index: 1001; /* Höher als main-nav */
-      }
-
-      nav.category ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        gap: 15px;
-        height: 100%;
-        align-items: center;
-      }
-
-      nav.category li {
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
-
-      nav.category li a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.2em; /* Gleiche Schriftgröße wie main-nav */
-        padding: 15px 20px; /* Gleiches Padding wie main-nav */
-        display: flex;
-        align-items: center;
-        height: 100%;
-        transition: background-color 0.3s;
-      }
-
-      nav.category li a:hover {
-        background-color: #444;
-        border-radius: 4px;
       }
 
       /* Content Bereiche */
@@ -172,18 +125,6 @@
 
       /* Responsive Design */
       @media (max-width: 768px) {
-        nav.category ul {
-          gap: 8px;
-          padding: 0 10px;
-          flex-wrap: wrap;
-          justify-content: center;
-        }
-        
-        nav.category li a {
-          font-size: 1em;
-          padding: 10px 12px;
-        }
-        
         nav.main-nav ul {
           padding: 0 15px;
         }
@@ -199,13 +140,49 @@
     </style>
   </head>
   <body>
-   <nav class="main-nav">
+    <!-- Untere Navigation - höher positioniert -->
+    <nav class="main-nav">
       <ul>
         <li><a href="index.html">shop</a></li>
         <li class="choosed"><a href="deals.html">deals</a></li>
         <li><a href="acc.html">account</a></li>
       </ul>
     </nav>
+    
+    <!-- Hauptinhalt -->
+    <div class="main-content">
+      <div class="deals-container">
+        <h1>Current Deals</h1>
+        <p>Check out our latest offers and discounts!</p>
+        
+        <div class="deal-item">
+          <div class="deal-title">Special Offer #1</div>
+          <div class="deal-price">
+            $99.99 
+            <span class="deal-original-price">$149.99</span>
+          </div>
+          <p>Limited time offer - save 33%!</p>
+        </div>
+        
+        <div class="deal-item">
+          <div class="deal-title">Bundle Deal</div>
+          <div class="deal-price">
+            $199.99 
+            <span class="deal-original-price">$299.99</span>
+          </div>
+          <p>Get the complete package at a discounted price.</p>
+        </div>
+        
+        <div class="deal-item">
+          <div class="deal-title">Flash Sale</div>
+          <div class="deal-price">
+            $49.99 
+            <span class="deal-original-price">$79.99</span>
+          </div>
+          <p>Hurry! Only available for 24 hours.</p>
+        </div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
