@@ -3,6 +3,200 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
+    <style>
+      /* Reset und Body */
+      body {
+        padding: 0;
+        margin: 0;
+        background-color: #333;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        padding-top: 70px; /* Platz für obere Navbar */
+        padding-bottom: 70px; /* Platz für untere Navbar */
+      }
+
+      /* Allgemeine List-Styles */
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      /* UNTERE NAVIGATION (main-nav) */
+      nav.main-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px; /* Feste Höhe */
+        background-color: #333;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+
+      nav.main-nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 30px;
+        height: 100%; /* Volle Höhe der Navigation nutzen */
+      }
+
+      nav.main-nav li {
+        height: 100%; /* Volle Höhe nutzen */
+        display: flex;
+        align-items: center;
+        font-size: 1.2em; /* Einheitliche Schriftgröße */
+      }
+
+      nav.main-nav a {
+        color: white;
+        text-decoration: none;
+        padding: 15px 20px; /* Einheitliches Padding */
+        display: flex;
+        align-items: center;
+        height: 100%;
+        transition: background-color 0.3s;
+      }
+
+      nav.main-nav a:hover {
+        background-color: #444;
+      }
+
+      /* Styling für das aktive/gewählte Element */
+      nav.main-nav li.choosed {
+        background-color: #555;
+        border-radius: 12px;
+        margin: 8px 4px; /* Kleiner Abstand für den Rahmen */
+      }
+
+      nav.main-nav li.choosed a {
+        font-weight: bold;
+        border-radius: 12px;
+      }
+
+      /* OBERE NAVIGATION (category) */
+      nav.category {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px; /* Gleiche Höhe wie main-nav */
+        background-color: #222;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1001; /* Höher als main-nav */
+      }
+
+      nav.category ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 15px;
+        height: 100%;
+        align-items: center;
+      }
+
+      nav.category li {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      nav.category li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2em; /* Gleiche Schriftgröße wie main-nav */
+        padding: 15px 20px; /* Gleiches Padding wie main-nav */
+        display: flex;
+        align-items: center;
+        height: 100%;
+        transition: background-color 0.3s;
+      }
+
+      nav.category li a:hover {
+        background-color: #444;
+        border-radius: 4px;
+      }
+
+      /* Content Bereiche */
+      .main-content {
+        padding: 20px;
+        min-height: calc(100vh - 140px);
+      }
+
+      .deals-container {
+        background-color: #444;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+
+      .deal-item {
+        background-color: #555;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 6px;
+        border-left: 4px solid #007bff;
+      }
+
+      .deal-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .deal-price {
+        color: #4CAF50;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+
+      .deal-original-price {
+        text-decoration: line-through;
+        color: #999;
+        margin-left: 10px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        nav.category ul {
+          gap: 8px;
+          padding: 0 10px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        
+        nav.category li a {
+          font-size: 1em;
+          padding: 10px 12px;
+        }
+        
+        nav.main-nav ul {
+          padding: 0 15px;
+        }
+        
+        nav.main-nav li {
+          font-size: 1em;
+        }
+        
+        nav.main-nav a {
+          padding: 12px 15px;
+        }
+      }
+    </style>
   </head>
   <body>
    <nav class="main-nav">
