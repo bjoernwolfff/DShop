@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -27,5 +27,291 @@
     <div id="drugs" class="content-category" style="display: none;">Drogen-Inhalte</div>
 
     <script src="script.js"></script>
+  </body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    
+    <!-- Inline CSS um GitHub Pages Probleme zu umgehen -->
+    <style>
+      /* Reset und Body */
+      * {
+        box-sizing: border-box;
+      }
+      
+      body {
+        padding: 0;
+        margin: 0;
+        background-color: #333;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        padding-top: 70px; /* Platz für obere Navbar */
+        padding-bottom: 70px; /* Platz für untere Navbar */
+      }
+      
+      /* Untere Navigation (main-nav) */
+      nav.main-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #333;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+      
+      nav.main-nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 600px;
+        padding: 0 30px;
+      }
+      
+      nav.main-nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+      }
+      
+      nav.main-nav a:hover {
+        background-color: #444;
+      }
+      
+      nav.main-nav li.choosed {
+        background-color: #555;
+        border-radius: 12px;
+      }
+      
+      nav.main-nav li.choosed a {
+        font-weight: bold;
+      }
+      
+      /* Obere Navigation (category) */
+      nav.category {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #222;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1001; /* Höher als main-nav */
+      }
+      
+      nav.category ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      nav.category li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        display: block;
+      }
+      
+      nav.category li a:hover {
+        background-color: #444;
+      }
+      
+      /* Content Bereiche */
+      .main-content {
+        padding: 20px;
+        min-height: calc(100vh - 140px);
+      }
+      
+      .content-category {
+        background-color: #444;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        display: none;
+      }
+      
+      .content-category.active {
+        display: block;
+      }
+      
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        nav.category ul {
+          gap: 8px;
+          padding: 0 10px;
+        }
+        
+        nav.category li a {
+          font-size: 0.9em;
+          padding: 6px 8px;
+        }
+        
+        nav.main-nav ul {
+          padding: 0 15px;
+        }
+      }
+      
+      /* Debug Hilfe */
+      .debug-info {
+        position: fixed;
+        top: 70px;
+        right: 10px;
+        background: rgba(255, 0, 0, 0.8);
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        z-index: 2000;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Debug Info (kann entfernt werden wenn alles funktioniert) -->
+    <div class="debug-info" id="debugInfo">
+      Loading...
+    </div>
+    
+    <!-- Obere Navigation -->
+    <nav class="category">
+      <ul>
+        <li><a href="#" data-category="drugs">drugs</a></li>
+        <li><a href="#" data-category="weapons">weapons</a></li>
+        <li><a href="#" data-category="money">money</a></li>
+        <li><a href="#" data-category="software">software</a></li>
+        <li><a href="#" data-category="porn">porn</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Untere Navigation -->
+    <nav class="main-nav">
+      <ul>
+        <li class="choosed"><a href="index.html">shop</a></li>
+        <li><a href="deals.html">deals</a></li>
+        <li><a href="acc.html">account</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Hauptinhalt -->
+    <div class="main-content">
+      <h1>Shop Categories</h1>
+      <p>Klicken Sie auf eine Kategorie oben um den Inhalt anzuzeigen.</p>
+      
+      <div id="money" class="content-category">
+        <h2>Money Category</h2>
+        <p>Geld-Inhalte werden hier angezeigt.</p>
+      </div>
+      
+      <div id="weapons" class="content-category">
+        <h2>Weapons Category</h2>
+        <p>Waffen-Inhalte werden hier angezeigt.</p>
+      </div>
+      
+      <div id="drugs" class="content-category">
+        <h2>Drugs Category</h2>
+        <p>Drogen-Inhalte werden hier angezeigt.</p>
+      </div>
+      
+      <div id="software" class="content-category">
+        <h2>Software Category</h2>
+        <p>Software-Inhalte werden hier angezeigt.</p>
+      </div>
+      
+      <div id="porn" class="content-category">
+        <h2>Adult Category</h2>
+        <p>Adult-Inhalte werden hier angezeigt.</p>
+      </div>
+    </div>
+
+    <script>
+      // Debug Informationen
+      function updateDebugInfo() {
+        const debugDiv = document.getElementById('debugInfo');
+        const categoryNav = document.querySelector('nav.category');
+        const mainNav = document.querySelector('nav.main-nav');
+        
+        if (debugDiv) {
+          debugDiv.innerHTML = `
+            Category Nav: ${categoryNav ? 'Found' : 'Missing'}<br>
+            Main Nav: ${mainNav ? 'Found' : 'Missing'}<br>
+            GitHub Pages: Active<br>
+            Time: ${new Date().toLocaleTimeString()}
+          `;
+        }
+      }
+      
+      // Kategorie Navigation
+      function initCategoryNavigation() {
+        const categoryLinks = document.querySelectorAll('nav.category a[data-category]');
+        const contentDivs = document.querySelectorAll('.content-category');
+        
+        categoryLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetCategory = this.getAttribute('data-category');
+            
+            // Alle Inhalte verstecken
+            contentDivs.forEach(div => {
+              div.classList.remove('active');
+            });
+            
+            // Gewählten Inhalt anzeigen
+            const targetDiv = document.getElementById(targetCategory);
+            if (targetDiv) {
+              targetDiv.classList.add('active');
+            }
+            
+            console.log('Switched to category:', targetCategory);
+          });
+        });
+      }
+      
+      // Initialisierung wenn DOM geladen ist
+      document.addEventListener('DOMContentLoaded', function() {
+        updateDebugInfo();
+        initCategoryNavigation();
+        
+        // Debug Info nach 5 Sekunden entfernen
+        setTimeout(() => {
+          const debugDiv = document.getElementById('debugInfo');
+          if (debugDiv) {
+            debugDiv.style.display = 'none';
+          }
+        }, 5000);
+      });
+      
+      // Console Debug
+      console.log('Shop page loaded for GitHub Pages');
+      console.log('Category nav found:', !!document.querySelector('nav.category'));
+      console.log('Main nav found:', !!document.querySelector('nav.main-nav'));
+    </script>
   </body>
 </html>
