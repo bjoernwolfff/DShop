@@ -20,9 +20,9 @@
   border-left: 4px solid #00ff7b;
 }
 .software-item {
-  background-color: #ffff7b;
+  background-color: #555;
   padding: 15px;
   margin: 15px 0;
   border-radius: 6px;
-  border-left: 4px solid #007bff;
+  border-left: 4px solid #ffff7b;
 }
