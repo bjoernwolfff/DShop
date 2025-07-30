@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+// Create new deal element
+        const dealElement = document.createElement('div');
+        dealElement.className = dealCategory;
+        
+        let imageHtml = '';
+        if (imageFile) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const img = dealElement.querySelector('.deal-image');
+            if (img) {
+              img.src = e.target.result;
+            }
+          };
+          reader.readAsDataURL(imageFile);
+          imageHtml = '<img class="deal-image" alt="Deal Image">';
+        }<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -26,7 +41,7 @@
       /* UNTERE NAVIGATION (main-nav) - HÖHER POSITIONIERT */
       nav.main-nav {
         position: fixed;
-        bottom: /*6*/0px; /* 60px vom Boden entfernt statt 0px */
+        bottom: 0px;
         left: 0;
         width: 100%;
         height: 60px;
@@ -302,18 +317,11 @@
               <input type="text" id="deal-name" name="deal-name" required>
             </div>
 
-            <div class="price-group">
-              <div class="form-group">
-                <label for="deal-price">Price ($):</label>
-                <input type="number" id="deal-price" name="deal-price" step="0.01" min="0" required>
-              </div>
-              <!--
-              <div class="form-group">
-                <label for="original-price">Original Price ($):</label>
-                <input type="number" id="original-price" name="original-price" step="0.01" min="0">
-              </div>
+            <div class="form-group">
+              <label for="deal-price">Price ($):</label>
+              <input type="number" id="deal-price" name="deal-price" step="0.01" min="0" required>
             </div>
-            -->
+
             <div class="form-group">
               <label for="deal-description">Description:</label>
               <textarea id="deal-description" name="deal-description" placeholder="Enter deal description..."></textarea>
@@ -420,43 +428,17 @@
         const formData = new FormData(this);
         const dealName = formData.get('deal-name');
         const dealPrice = formData.get('deal-price');
-        const originalPrice = formData.get('original-price');
         const dealDescription = formData.get('deal-description');
         const dealCategory = formData.get('deal-category');
         const imageFile = imageInput.files[0];
         
-        // Calculate savings percentage
-        let savingsText = '';
-        if (originalPrice && parseFloat(originalPrice) > parseFloat(dealPrice)) {
-          const savings = Math.round(((parseFloat(originalPrice) - parseFloat(dealPrice)) / parseFloat(originalPrice)) * 100);
-          savingsText = ` - save ${savings}%!`;
-        }
-        
-        // Create new deal element
-        const dealElement = document.createElement('div');
-        dealElement.className = dealCategory;
-        
-        let imageHtml = '';
-        if (imageFile) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            const img = dealElement.querySelector('.deal-image');
-            if (img) {
-              img.src = e.target.result;
-            }
-          };
-          reader.readAsDataURL(imageFile);
-          imageHtml = '<img class="deal-image" alt="Deal Image">';
-        }
-        
         dealElement.innerHTML = `
           <div class="deal-title">${dealName}</div>
           <div class="deal-price">
-            $${parseFloat(dealPrice).toFixed(2)}
-            ${originalPrice ? `<span class="deal-original-price">$${parseFloat(originalPrice).toFixed(2)}</span>` : ''}
+            ${parseFloat(dealPrice).toFixed(2)}
           </div>
           ${imageHtml}
-          <p>${dealDescription}${savingsText}</p>
+          <p>${dealDescription}</p>
         `;
         
         // Add to deals container
