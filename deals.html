@@ -1,19 +1,4 @@
-// Create new deal element
-        const dealElement = document.createElement('div');
-        dealElement.className = dealCategory;
-        
-        let imageHtml = '';
-        if (imageFile) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            const img = dealElement.querySelector('.deal-image');
-            if (img) {
-              img.src = e.target.result;
-            }
-          };
-          reader.readAsDataURL(imageFile);
-          imageHtml = '<img class="deal-image" alt="Deal Image">';
-        }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
