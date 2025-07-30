@@ -1,25 +1,25 @@
-drug-item {
+.drug-item {
   background-color: #555;
   padding: 15px;
   margin: 15px 0;
   border-radius: 6px;
   border-left: 4px solid #007bff;
 }
-weapon-item {
+.weapon-item {
   background-color: #555;
   padding: 15px;
   margin: 15px 0;
   border-radius: 6px;
   border-left: 4px solid #007bff;
 }
-money-item {
+.money-item {
   background-color: #555;
   padding: 15px;
   margin: 15px 0;
   border-radius: 6px;
   border-left: 4px solid #007bff;
 }
-software-item {
+.software-item {
   background-color: #555;
   padding: 15px;
   margin: 15px 0;
