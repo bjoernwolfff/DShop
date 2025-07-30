@@ -417,10 +417,20 @@
         const dealCategory = formData.get('deal-category');
         const imageFile = imageInput.files[0];
         
+        // Create deal element
+        const dealElement = document.createElement('div');
+        dealElement.className = dealCategory;
+        
+        // Create image HTML if image exists
+        let imageHtml = '';
+        if (imageFile && imagePreview.src) {
+          imageHtml = `<img src="${imagePreview.src}" class="deal-image" alt="${dealName}">`;
+        }
+        
         dealElement.innerHTML = `
           <div class="deal-title">${dealName}</div>
           <div class="deal-price">
-            ${parseFloat(dealPrice).toFixed(2)}
+            $${parseFloat(dealPrice).toFixed(2)}
           </div>
           ${imageHtml}
           <p>${dealDescription}</p>
