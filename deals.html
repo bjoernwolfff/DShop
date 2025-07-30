@@ -144,6 +144,103 @@
         border: 4px solid #fff;
         width: 100%;
         color: #fff;
+        cursor: pointer;
+        font-size: 1em;
+        border-radius: 6px;
+      }
+
+      .create-button:hover {
+        background-color: #666 !important;
+      }
+
+      /* Form Styles */
+      .deal-form {
+        background-color: #555;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 6px;
+        border-left: 4px solid #ffffff;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        background-color: #444;
+        border: 1px solid #666;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 1em;
+        box-sizing: border-box;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #4CAF50;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .price-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      .price-group .form-group {
+        flex: 1;
+        margin-bottom: 0;
+      }
+
+      .image-upload {
+        border: 2px dashed #666;
+        padding: 20px;
+        text-align: center;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: border-color 0.3s;
+      }
+
+      .image-upload:hover {
+        border-color: #4CAF50;
+      }
+
+      .image-upload.dragover {
+        border-color: #4CAF50;
+        background-color: #3a3a3a;
+      }
+
+      .image-preview {
+        margin-top: 10px;
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 4px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .deal-image {
+        max-width: 150px;
+        max-height: 150px;
+        border-radius: 4px;
+        margin-top: 10px;
       }
     </style>
   </head>
@@ -189,17 +286,191 @@
           </div>
           <p>Hurry! Only available for 24 hours.</p>
         </div>
-      </div>
-      <div class="deals-container">
-      <h1>Create Deal</h1>
-      <div class="deal-item">
-        
-      </div>
-      <button id="create-deal" class="create-button">create</button>
-    </div>
-    </div>
-    
 
-    <script src="script.js"></script>
+        <!-- Dynamisch erstellte Deals werden hier eingefügt -->
+        <div id="dynamic-deals"></div>
+      </div>
+
+      <div class="deals-container">
+        <h1>Create Deal</h1>
+        
+        <!-- Deal Creation Form -->
+        <div class="deal-form" id="deal-form" style="display: none;">
+          <form id="create-deal-form">
+            <div class="form-group">
+              <label for="deal-name">Deal Title:</label>
+              <input type="text" id="deal-name" name="deal-name" required>
+            </div>
+
+            <div class="price-group">
+              <div class="form-group">
+                <label for="deal-price">Sale Price ($):</label>
+                <input type="number" id="deal-price" name="deal-price" step="0.01" min="0" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="original-price">Original Price ($):</label>
+                <input type="number" id="original-price" name="original-price" step="0.01" min="0">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="deal-description">Description:</label>
+              <textarea id="deal-description" name="deal-description" placeholder="Enter deal description..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="deal-category">Category:</label>
+              <select id="deal-category" name="deal-category">
+                <option value="weapon-item">Weapon</option>
+                <option value="drug-item">Drug</option>
+                <option value="software-item">Software</option>
+                <option value="deal-item">General</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Deal Image:</label>
+              <div class="image-upload" id="image-upload">
+                <p>Click here or drag & drop an image</p>
+                <input type="file" id="image-input" accept="image/*" class="hidden">
+                <img id="image-preview" class="image-preview hidden" alt="Preview">
+              </div>
+            </div>
+
+            <button type="submit" class="create-button">Add Deal</button>
+          </form>
+        </div>
+
+        <button id="toggle-form" class="create-button">Create New Deal</button>
+      </div>
+    </div>
+
+    <script>
+      // Form toggle functionality
+      const toggleBtn = document.getElementById('toggle-form');
+      const dealForm = document.getElementById('deal-form');
+      
+      toggleBtn.addEventListener('click', function() {
+        if (dealForm.style.display === 'none') {
+          dealForm.style.display = 'block';
+          toggleBtn.textContent = 'Cancel';
+        } else {
+          dealForm.style.display = 'none';
+          toggleBtn.textContent = 'Create New Deal';
+          document.getElementById('create-deal-form').reset();
+          document.getElementById('image-preview').classList.add('hidden');
+        }
+      });
+
+      // Image upload functionality
+      const imageUpload = document.getElementById('image-upload');
+      const imageInput = document.getElementById('image-input');
+      const imagePreview = document.getElementById('image-preview');
+
+      imageUpload.addEventListener('click', () => {
+        imageInput.click();
+      });
+
+      imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            imagePreview.src = e.target.result;
+            imagePreview.classList.remove('hidden');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Drag and drop functionality
+      imageUpload.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        imageUpload.classList.add('dragover');
+      });
+
+      imageUpload.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        imageUpload.classList.remove('dragover');
+      });
+
+      imageUpload.addEventListener('drop', function(e) {
+        e.preventDefault();
+        imageUpload.classList.remove('dragover');
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0 && files[0].type.startsWith('image/')) {
+          const file = files[0];
+          imageInput.files = files;
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            imagePreview.src = e.target.result;
+            imagePreview.classList.remove('hidden');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Form submission
+      document.getElementById('create-deal-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const dealName = formData.get('deal-name');
+        const dealPrice = formData.get('deal-price');
+        const originalPrice = formData.get('original-price');
+        const dealDescription = formData.get('deal-description');
+        const dealCategory = formData.get('deal-category');
+        const imageFile = imageInput.files[0];
+        
+        // Calculate savings percentage
+        let savingsText = '';
+        if (originalPrice && parseFloat(originalPrice) > parseFloat(dealPrice)) {
+          const savings = Math.round(((parseFloat(originalPrice) - parseFloat(dealPrice)) / parseFloat(originalPrice)) * 100);
+          savingsText = ` - save ${savings}%!`;
+        }
+        
+        // Create new deal element
+        const dealElement = document.createElement('div');
+        dealElement.className = dealCategory;
+        
+        let imageHtml = '';
+        if (imageFile) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const img = dealElement.querySelector('.deal-image');
+            if (img) {
+              img.src = e.target.result;
+            }
+          };
+          reader.readAsDataURL(imageFile);
+          imageHtml = '<img class="deal-image" alt="Deal Image">';
+        }
+        
+        dealElement.innerHTML = `
+          <div class="deal-title">${dealName}</div>
+          <div class="deal-price">
+            $${parseFloat(dealPrice).toFixed(2)}
+            ${originalPrice ? `<span class="deal-original-price">$${parseFloat(originalPrice).toFixed(2)}</span>` : ''}
+          </div>
+          ${imageHtml}
+          <p>${dealDescription}${savingsText}</p>
+        `;
+        
+        // Add to deals container
+        document.getElementById('dynamic-deals').appendChild(dealElement);
+        
+        // Reset form and hide it
+        this.reset();
+        imagePreview.classList.add('hidden');
+        dealForm.style.display = 'none';
+        toggleBtn.textContent = 'Create New Deal';
+        
+        // Success message (optional)
+        alert('Deal created successfully!');
+      });
+    </script>
   </body>
 </html>
