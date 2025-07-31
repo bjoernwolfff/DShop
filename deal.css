@@ -1,0 +1,236 @@
+      /* Reset und Body */
+      body {
+        padding: 0;
+        margin: 0;
+        background-color: #333;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        padding-bottom: 120px; /* Mehr Platz für höhere Navbar */
+      }
+
+      /* Allgemeine List-Styles */
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      /* UNTERE NAVIGATION (main-nav) - HÖHER POSITIONIERT */
+      nav.main-nav {
+        position: fixed;
+        bottom: 0px;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #333;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+
+      nav.main-nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 30px;
+        height: 100%;
+      }
+
+      nav.main-nav li {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-size: 1.2em;
+      }
+
+      nav.main-nav a {
+        color: white;
+        text-decoration: none;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        transition: background-color 0.3s;
+      }
+
+      nav.main-nav a:hover {
+        background-color: #444;
+      }
+
+      /* Styling für das aktive/gewählte Element */
+      nav.main-nav li.choosed {
+        background-color: #555;
+        border-radius: 12px;
+        margin: 8px 4px;
+      }
+
+      nav.main-nav li.choosed a {
+        font-weight: bold;
+        border-radius: 12px;
+      }
+
+      /* Content Bereiche */
+      .main-content {
+        padding: 20px;
+        min-height: calc(100vh - 140px);
+      }
+
+      .deals-container {
+        background-color: #444;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+
+      .deal-item {
+        background-color: #555;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 6px;
+        border-left: 4px solid #ffffff;
+      }
+
+      .deal-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .deal-price {
+        color: #4CAF50;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+
+      .deal-original-price {
+        text-decoration: line-through;
+        color: #999;
+        margin-left: 10px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        nav.main-nav ul {
+          padding: 0 15px;
+        }
+        
+        nav.main-nav li {
+          font-size: 1em;
+        }
+        
+        nav.main-nav a {
+          padding: 12px 15px;
+        }
+      }
+      .create-button {
+        background-color: #555 !important;
+        padding: 15px;
+        margin: 15px 0;
+        border: 4px solid #fff;
+        width: 100%;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1em;
+        border-radius: 6px;
+      }
+
+      .create-button:hover {
+        background-color: #666 !important;
+      }
+
+      /* Form Styles */
+      .deal-form {
+        background-color: #555;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 6px;
+        border-left: 4px solid #ffffff;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        background-color: #444;
+        border: 1px solid #666;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 1em;
+        box-sizing: border-box;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #4CAF50;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .price-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      .price-group .form-group {
+        flex: 1;
+        margin-bottom: 0;
+      }
+
+      .image-upload {
+        border: 2px dashed #666;
+        padding: 20px;
+        text-align: center;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: border-color 0.3s;
+      }
+
+      .image-upload:hover {
+        border-color: #4CAF50;
+      }
+
+      .image-upload.dragover {
+        border-color: #4CAF50;
+        background-color: #3a3a3a;
+      }
+
+      .image-preview {
+        margin-top: 10px;
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 4px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .deal-image {
+        max-width: 150px;
+        max-height: 150px;
+        border-radius: 4px;
+        margin-top: 10px;
+      }
