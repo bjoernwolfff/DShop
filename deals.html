@@ -26,44 +26,8 @@
         <h1>Current Deals</h1>
         <p>Here are your Deals!</p>
         
-        <div class="weapon-item">
-          <div class="deal-title">Special Offer #1</div>
-          <div class="deal-price">
-            $99.99 
-            <span class="deal-original-price">$149.99</span>
-          </div>
-          <p>Limited time offer - save 33%!</p>
-        </div>
-        
-        <div class="drug-item">
-          <div class="deal-title">Bundle Deal</div>
-          <div class="deal-price">
-            $199.99 
-            <span class="deal-original-price">$299.99</span>
-          </div>
-          <p>Get the complete package at a discounted price.</p>
-        </div>
-        
-        <div class="software-item">
-          <div class="deal-title">Flash Sale</div>
-          <div class="deal-price">
-            $49.99 
-            <span class="deal-original-price">$79.99</span>
-          </div>
-          <p>Hurry! Only available for 24 hours.</p>
-        </div>
-        
-        <div class="money-item">
-          <div class="deal-title">Flash Sale</div>
-          <div class="deal-price">
-            $49.99 
-            <span class="deal-original-price">$79.99</span>
-          </div>
-          <p>Hurry! Only available for 24 hours.</p>
-        </div>
-
-        <!-- Dynamisch erstellte Deals werden hier eingefügt -->
-        <div id="dynamic-deals"></div>
+        <!-- Deals werden jetzt dynamisch aus JSON geladen -->
+        <div id="all-deals"></div>
       </div>
 
       <div class="deals-container">
@@ -80,6 +44,11 @@
             <div class="form-group">
               <label for="deal-price">Price ($):</label>
               <input type="number" id="deal-price" name="deal-price" step="0.01" min="0" required>
+            </div>
+
+            <div class="form-group">
+              <label for="deal-original-price">Original Price ($):</label>
+              <input type="number" id="deal-original-price" name="deal-original-price" step="0.01" min="0">
             </div>
 
             <div class="form-group">
@@ -111,10 +80,94 @@
         </div>
 
         <button id="toggle-form" class="create-button">Create New Deal</button>
+        <button id="download-json" class="create-button" style="margin-left: 10px;">Download JSON</button>
       </div>
     </div>
 
     <script>
+      let allDeals = [];
+
+      // JSON Datei laden
+      async function loadDeals() {
+        try {
+          const response = await fetch('deals.json');
+          const data = await response.json();
+          allDeals = data.deals || [];
+          renderDeals();
+        } catch (error) {
+          console.error('Error loading deals:', error);
+          // Fallback auf leeres Array wenn JSON nicht geladen werden kann
+          allDeals = [];
+          renderDeals();
+        }
+      }
+
+      // Deals rendern
+      function renderDeals() {
+        const container = document.getElementById('all-deals');
+        container.innerHTML = '';
+
+        allDeals.forEach(deal => {
+          const dealElement = document.createElement('div');
+          dealElement.className = deal.category;
+          
+          let imageHtml = '';
+          if (deal.image) {
+            imageHtml = `<img src="${deal.image}" class="deal-image" alt="${deal.title}">`;
+          }
+
+          let priceHtml = `$${deal.price.toFixed(2)}`;
+          if (deal.originalPrice && deal.originalPrice > deal.price) {
+            priceHtml += ` <span class="deal-original-price">$${deal.originalPrice.toFixed(2)}</span>`;
+          }
+          
+          dealElement.innerHTML = `
+            <div class="deal-title">${deal.title}</div>
+            <div class="deal-price">
+              ${priceHtml}
+            </div>
+            ${imageHtml}
+            <p>${deal.description}</p>
+          `;
+          
+          container.appendChild(dealElement);
+        });
+      }
+
+      // Deal hinzufügen
+      function addDeal(dealData) {
+        const newDeal = {
+          id: 'deal' + Date.now(),
+          title: dealData.title,
+          price: parseFloat(dealData.price),
+          originalPrice: dealData.originalPrice ? parseFloat(dealData.originalPrice) : null,
+          description: dealData.description,
+          category: dealData.category,
+          image: dealData.image
+        };
+        
+        allDeals.push(newDeal);
+        renderDeals();
+        downloadUpdatedJSON();
+      }
+
+      // JSON Download Funktion
+      function downloadUpdatedJSON() {
+        const jsonData = {
+          deals: allDeals
+        };
+        
+        const dataStr = JSON.stringify(jsonData, null, 2);
+        const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(dataBlob);
+        link.download = 'deals.json';
+        link.click();
+        
+        URL.revokeObjectURL(link.href);
+      }
+
       // Form toggle functionality
       const toggleBtn = document.getElementById('toggle-form');
       const dealForm = document.getElementById('deal-form');
@@ -130,6 +183,9 @@
           document.getElementById('image-preview').classList.add('hidden');
         }
       });
+
+      // Download JSON Button
+      document.getElementById('download-json').addEventListener('click', downloadUpdatedJSON);
 
       // Image upload functionality
       const imageUpload = document.getElementById('image-upload');
@@ -188,31 +244,25 @@
         const formData = new FormData(this);
         const dealName = formData.get('deal-name');
         const dealPrice = formData.get('deal-price');
+        const dealOriginalPrice = formData.get('deal-original-price');
         const dealDescription = formData.get('deal-description');
         const dealCategory = formData.get('deal-category');
         const imageFile = imageInput.files[0];
         
-        // Create deal element
-        const dealElement = document.createElement('div');
-        dealElement.className = dealCategory;
-        
-        // Create image HTML if image exists
-        let imageHtml = '';
+        let imageDataUrl = null;
         if (imageFile && imagePreview.src) {
-          imageHtml = `<img src="${imagePreview.src}" class="deal-image" alt="${dealName}">`;
+          imageDataUrl = imagePreview.src;
         }
         
-        dealElement.innerHTML = `
-          <div class="deal-title">${dealName}</div>
-          <div class="deal-price">
-            $${parseFloat(dealPrice).toFixed(2)}
-          </div>
-          ${imageHtml}
-          <p>${dealDescription}</p>
-        `;
-        
-        // Add to deals container
-        document.getElementById('dynamic-deals').appendChild(dealElement);
+        // Deal hinzufügen
+        addDeal({
+          title: dealName,
+          price: dealPrice,
+          originalPrice: dealOriginalPrice,
+          description: dealDescription,
+          category: dealCategory,
+          image: imageDataUrl
+        });
         
         // Reset form and hide it
         this.reset();
@@ -220,9 +270,12 @@
         dealForm.style.display = 'none';
         toggleBtn.textContent = 'Create New Deal';
         
-        // Success message (optional)
-        alert('Deal created successfully!');
+        // Success message
+        alert('Deal created successfully! Updated JSON file will be downloaded automatically.');
       });
+
+      // Deals beim Laden der Seite laden
+      loadDeals();
     </script>
   </body>
 </html>
