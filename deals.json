@@ -1,1 +1,36 @@
-
+{
+  "deals": [
+    {
+      "id": "deal1",
+      "title": "Special Offer #1",
+      "price": 99.99,
+      "description": "Limited time offer - save 33%!",
+      "category": "weapon-item",
+      "image": null
+    },
+    {
+      "id": "deal2",
+      "title": "Bundle Deal",
+      "price": 199.99,
+      "description": "Get the complete package at a discounted price.",
+      "category": "drug-item",
+      "image": null
+    },
+    {
+      "id": "deal3",
+      "title": "Flash Sale",
+      "price": 49.99,
+      "description": "Hurry! Only available for 24 hours.",
+      "category": "software-item",
+      "image": null
+    },
+    {
+      "id": "deal4",
+      "title": "Flash Sale",
+      "price": 49.99,
+      "description": "Hurry! Only available for 24 hours.",
+      "category": "money-item",
+      "image": null
+    }
+  ]
+}
