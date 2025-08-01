@@ -9,6 +9,17 @@ body {
   padding-bottom: 70px; /* Platz für untere Navbar */
 }
 
+imput {
+  width: 100%;
+  padding: 10px;
+  background-color: #444;
+  border: 1px solid #666;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
 /* Allgemeine List-Styles */
 ul {
   list-style-type: none;
