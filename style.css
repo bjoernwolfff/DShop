@@ -9,7 +9,15 @@ body {
   padding-bottom: 70px; /* Platz für untere Navbar */
 }
 
-imput {
+a {
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+input {
   width: 100%;
   padding: 10px;
   background-color: #444;
